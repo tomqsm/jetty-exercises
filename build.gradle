@@ -1,0 +1,43 @@
+apply plugin: "groovy"
+apply plugin: "application"
+sourceCompatibility = 11
+group 'biz.lwb.groovysetup'
+version '1.0-SNAPSHOT'
+
+repositories {
+    // Spock releases are available from Maven Central
+    mavenCentral()
+    // Spock snapshots are available from the Sonatype OSS snapshot repository
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+}
+
+dependencies {
+//    implementation localGroovy()
+    implementation 'org.eclipse.jetty:jetty-server:11.0.6'
+    implementation 'org.eclipse.jetty:jetty-webapp:11.0.6'
+    implementation 'org.eclipse.jetty:jetty-servlet:11.0.6'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.10.0'
+
+    implementation 'org.codehaus.groovy:groovy-all:3.0.8'
+    implementation 'org.spockframework:spock-core:2.0-groovy-3.0'
+//    implementation 'org.codehaus.groovy:groovy-all:2.4.15'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
+
+application {
+    mainClass = 'biz.lwb.groovysetup.AppServer'
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'biz.lwb.groovysetup.AppServer'
+        )
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
